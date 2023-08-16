@@ -43,22 +43,22 @@ public class Player extends Entity{
     }
     public void accelerateTimer(Graphics g){
         g.setColor(Color.RED);
-        g.fillRect((int)getX() - 2, (int)getY() + 20, 3 * 2, 5);
+        g.fillRect((int) getWorldX() - 2, (int) getWorldY() + 20, 3 * 2, 5);
         g.setColor(Color.CYAN);
-        g.fillRect((int)getX() - 2, (int)getY() + 20, timer * 2, 5);
+        g.fillRect((int) getWorldX() - 2, (int) getWorldY() + 20, timer * 2, 5);
     }
     public void armsUpdate(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        double angle = Math.atan2(mouseY - getY(), mouseX - getX());
+        double angle = Math.atan2(mouseY - getWorldY(), mouseX - getWorldX());
         if(firing){
             g2.setColor(Color.YELLOW);
-            int bulletX = (int) (getX()+5);
-            int bulletY = (int) (getY()+5);
+            int bulletX = (int) (getWorldX()+5);
+            int bulletY = (int) (getWorldY()+5);
             g2.setStroke(new BasicStroke(1));
             g2.drawLine(bulletX, bulletY, bulletX + (int)(100 * Math.cos(angle)), bulletY + (int)(100 * Math.sin(angle)));
         }
-        int gunX = (int) (getX()+5);
-        int gunY = (int) (getY()+5);
+        int gunX = (int) (getWorldX()+5);
+        int gunY = (int) (getWorldY()+5);
         g2.setColor(Color.DARK_GRAY);
         g2.setStroke(new BasicStroke(5));
         g2.drawLine(gunX, gunY, gunX + (int)(20 * Math.cos(angle)), gunY + (int)(20 * Math.sin(angle)));
@@ -92,25 +92,25 @@ public class Player extends Entity{
         accelerating = b;
     }
     public void movementUpdate(){
-        if(left && !up || left && !down) setX(-speed);
-        if (right && !up || right && !down) setX(speed);
-        if (up && !left || up && !right) setY(-speed);
-        if (down && !left || down && !right) setY(speed);
+        if(left && !up || left && !down) setWorldX(-speed);
+        if (right && !up || right && !down) setWorldX(speed);
+        if (up && !left || up && !right) setWorldY(-speed);
+        if (down && !left || down && !right) setWorldY(speed);
         if (left && up) {
-            setX(-speed / 2);
-            setY(-speed / 2);
+            setWorldX(-speed / 2);
+            setWorldY(-speed / 2);
         }
         if (left && down) {
-            setX(-speed / 2);
-            setY(speed / 2);
+            setWorldX(-speed / 2);
+            setWorldY(speed / 2);
         }
         if (right && up) {
-            setX(speed / 2);
-            setY(-speed / 2);
+            setWorldX(speed / 2);
+            setWorldY(-speed / 2);
         }
         if (right && down) {
-            setX(speed / 2);
-            setY(speed / 2);
+            setWorldX(speed / 2);
+            setWorldY(speed / 2);
         }
     }
     public void activateAcceleration(){
